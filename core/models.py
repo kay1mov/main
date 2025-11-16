@@ -90,7 +90,7 @@ class Explosion(Entity):
         self.model = "sphere"
         self.collider = "box"
         self.color = color.red
-        self.power = 1000
+        self.power = 500
         self.affectable = False
         self.exploded = False
         self.explosion_delay = 1
