@@ -41,7 +41,8 @@ class Phys:
         """
 
         direction = (hit.world_position - own.world_position)
-        distance = max(direction.length(), 0.5)
+#        radius = max(hit.scale.x, hit.scale.y, hit.scale.z) * 0.5
+        distance = max(direction.length(), 0.500)
         direction = direction.normalized()
 
 
@@ -66,11 +67,7 @@ class Phys:
         :return: Vec3(float, float, float)
         """
 
-
         velocity.y += GRAVITY * dt
-
-        if abs(velocity.y) <= 1:
-            velocity.y = 0
 
         return velocity
 
@@ -81,7 +78,7 @@ class Phys:
         :param world: dict
         :param radius: float
         :param center: Vec3(float, float, float)
-        :return:
+        :return: List[Objects]
         """
 
         au = []
@@ -95,15 +92,15 @@ class Phys:
         return au
 
     @staticmethod
-    def get_object_energy(object):
+    def get_object_energy(obj):
         """
         Энергия объекта равен ее абсолютной скорости * на массу
-        :param object:
-        :return:
+        :param obj:
+        :return: float
         """
 
-        x, y, z = object.velocity
-        w = object.weight
+        x, y, z = obj.velocity
+        w = obj.weight
 
         e = w * (abs(x) + abs(y) + abs(z))
 
@@ -111,5 +108,9 @@ class Phys:
 
     @staticmethod
     def get_distance_by_velocity(velocity: Vec3):
+        """
+        :param velocity: Vector3
+        :return: float
+        """
 
         return abs(velocity.x)+abs(velocity.y)+abs(velocity.z)

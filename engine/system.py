@@ -1,4 +1,4 @@
-import threading, os, psutil
+import threading, os, psutil, json
 
 class ThreadMaster:
 
@@ -42,4 +42,16 @@ class ThreadMaster:
 
 
 
+class IO:
 
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def load_json(path_to_file: str):
+
+        try:
+            with open(path_to_file, mode="r", encoding="utf8") as f:
+                return json.load(f)
+        except (FileNotFoundError, PermissionError):
+            return None
